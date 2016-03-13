@@ -1,0 +1,23 @@
+{
+  "name": "angular-template-compiler",
+  "version": "1.0.0",
+  "description": "A module provides function to compile angular templates written in jade-lang into a JS file.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/s1300045/node-angular-template-compiler.git"
+  },
+  "author": "Daniel W. Chen <daniel.chen@inventivewheel.com> (http://www.inventivewheel.com/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/s1300045/node-angular-template-compiler/issues"
+  },
+  "homepage": "https://github.com/s1300045/node-angular-template-compiler#readme",
+  "dependencies": {
+    "jade": "^1.11.0",
+    "node-ls": "git@github.com:s1300045/node-ls.git"
+  }
+}
