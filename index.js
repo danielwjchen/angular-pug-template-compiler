@@ -5,10 +5,36 @@
  */
 'use strict';
 var fs = require('fs');
+var path = require('path');
 var nodels = require('node-ls');
 var jade = require('jade');
 
 module.exports = {
+    /**
+     * Ensures directory in the given file path exists
+     *
+     * @param {string} filePath
+     */
+    ensureDirectoryExistence: function(filePath) {
+        var dirname = path.dirname(filePath);
+        if (this.directoryExists(dirname)) {
+            return true;
+        }
+        this.ensureDirectoryExistence(dirname);
+        fs.mkdirSync(dirname);
+    },
+    /**
+     * Checks if a directory exists
+     *
+     * @param {string} path
+     */
+    directoryExists: function(path) {
+        try {
+            return fs.statSync(path).isDirectory();
+        } catch (err) {
+            return false;
+        }
+    },
     /**
      * Compiles jade files into a angularJS module
      *
@@ -23,6 +49,7 @@ module.exports = {
         var content = '(function(angular) {';
         var itemPieces;
         var filename;
+
         content += "'use strict';";
         content += "angular.module('" + angularJSModuleName + "', []).run(function($templateCache) {";
         templateFiles.files.forEach(function(item) {
@@ -32,7 +59,7 @@ module.exports = {
             content += filename.replace('.tpl.jade', '.html');
             content += '","';
             content += jade.render(
-                grunt.file.read(item), 
+                fs.readFileSync(item),
                 {
                     filename: filename,
                     configs: configs
@@ -44,6 +71,7 @@ module.exports = {
         });
         content += '});';
         content += '})(angular);';
+        this.ensureDirectoryExistence(distFilePath);
         fs.writeFileSync(distFilePath, content);
     },
 };
