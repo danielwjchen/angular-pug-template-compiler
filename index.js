@@ -1,5 +1,5 @@
 /**
- * Defines module that compiles angualrJS templates written in jade into an 
+ * Defines module that compiles angualrJS templates written in pug/jade into an 
  * angularJS module
  * @author Daniel W. Chen <daniel.chen@inventivewheel.com>
  */
@@ -7,7 +7,7 @@
 var fs = require('fs');
 var path = require('path');
 var nodels = require('node-ls');
-var jade = require('jade');
+var pug = require('pug');
 
 module.exports = {
     /**
@@ -36,7 +36,7 @@ module.exports = {
         }
     },
     /**
-     * Compiles jade files into a angularJS module
+     * Compiles pug/jade files into a angularJS module
      *
      * @param {string} angularJSModuleName
      * @param {object} configs
@@ -45,7 +45,7 @@ module.exports = {
      */
     compile: function(angularJSModuleName, configs, srcFolderPath, distFilePath) {
         var templatePaths = [];
-        var templateFiles = nodels.listFiles(srcFolderPath, /\.tpl\.jade$/i);
+        var templateFiles = nodels.listFiles(srcFolderPath, /\.tpl\.(jade|pug)$/i);
         var content = '(function(angular) {';
         var itemPieces;
         var filename;
@@ -56,9 +56,11 @@ module.exports = {
             itemPieces = item.split('/');
             filename = itemPieces[itemPieces.length -1];
             content += '$templateCache.put("';
-            content += filename.replace('.tpl.jade', '.html');
+            ['.tpl.jade', '.tpl.pug',].forEach(function(extension) {
+                content += filename.replace(extension, '.html');
+            });
             content += '","';
-            content += jade.render(
+            content += pug.render(
                 fs.readFileSync(item),
                 {
                     filename: filename,
