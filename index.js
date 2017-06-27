@@ -56,8 +56,13 @@ module.exports = {
             itemPieces = item.split('/');
             filename = itemPieces[itemPieces.length -1];
             content += '$templateCache.put("';
-            ['.tpl.jade', '.tpl.pug',].forEach(function(extension) {
+            ['.tpl.jade', '.tpl.pug',].some(function(extension) {
+                var index = content.indexOf(extension);
+                if (index === -1) {
+                    return false;
+                }
                 content += filename.replace(extension, '.html');
+                return true;
             });
             content += '","';
             content += pug.render(
