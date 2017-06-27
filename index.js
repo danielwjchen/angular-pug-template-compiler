@@ -57,7 +57,7 @@ module.exports = {
             filename = itemPieces[itemPieces.length -1];
             content += '$templateCache.put("';
             ['.tpl.jade', '.tpl.pug',].some(function(extension) {
-                var index = content.indexOf(extension);
+                var index = filename.indexOf(extension);
                 if (index === -1) {
                     return false;
                 }
