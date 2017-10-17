@@ -3,9 +3,6 @@
   "version": "1.1.0",
   "description": "A module provides function to compile angular templates written in pug/jade into a JS file.",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/s1300045/node-angular-template-compiler.git"
