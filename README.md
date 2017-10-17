@@ -1,6 +1,6 @@
-# angularJS template compiler
+# angularJS pug template compiler
 
-A commonJS module provides function to compile angular templates written in jade-lang into a JS file. It utilizes [$templateCache](https://docs.angularjs.org/api/ng/service/$templateCache). The jade files must end with `.tpl.jade` as file extension. 
+A commonJS module provides function to compile angular templates written in jade-lang into a JS file. It utilizes [$templateCache](https://docs.angularjs.org/api/ng/service/$templateCache). The jade files must end with `.tpl.pug` or `.tpl.jade` as file extension. 
 
 Please note this compiler runs synchronously. 
 
