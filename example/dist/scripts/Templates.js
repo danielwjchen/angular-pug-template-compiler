@@ -1,1 +1,0 @@
-(function(angular) {'use strict';angular.module('Templates', []).run(function($templateCache) {$templateCache.put("home.html","<h1>Hello World!</h1>");$templateCache.put("uiHeroForm.html","<form ng-submit=\"onSubmit()\"><button type=\"submit\">Save</button><button type=\"reset\">Cancel</button></form>");});})(angular);
